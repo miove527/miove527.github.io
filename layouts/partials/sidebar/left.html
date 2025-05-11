@@ -81,25 +81,29 @@
         <li class="menu-bottom-section">
             <ol class="menu">
                 {{- $currentLanguageCode := .Language.Lang -}}
-                {{ if ( compare.Gt .Site.Home.AllTranslations.Len 1 ) }}
-                    {{ with .Site.Home.AllTranslations }}
-                        <li id="i18n-switch">  
-                            {{ partial "helper/icon" "language" }}
-                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
-                                {{ range . }}
-                                    <option value="{{ .Permalink }}" {{ if eq .Language.Lang $currentLanguageCode }}selected{{ end }}>{{ .Language.LanguageName }}</option>
-                                {{ end }}
-                            </select>
-                        </li>
-                    {{ end }}
+                {{- $otherLanguage := "" -}}
+                {{ if (compare.Gt .Site.Home.AllTranslations.Len 1) }}
+                {{ with .Site.Home.AllTranslations }}
+                {{ range . }}
+                {{ if ne .Language.Lang $currentLanguageCode }}
+                {{- $otherLanguage = . -}}
+                {{ end }}
+                {{ end }}
+                <li id="i18n-switch">
+                    {{ partial "helper/icon" "language" }}
+                    <a href="{{ $otherLanguage.Permalink }}">
+                        {{ $otherLanguage.Language.LanguageName }}
+                    </a>
+                </li>
+                {{ end }}
                 {{ end }}
 
                 {{ if (default false .Site.Params.colorScheme.toggle) }}
-                    <li id="dark-mode-toggle">
-                        {{ partial "helper/icon" "toggle-left" }}
-                        {{ partial "helper/icon" "toggle-right" }}
-                        <span>{{ T "darkMode" }}</span>
-                    </li>
+                <li id="dark-mode-toggle">
+                    {{ partial "helper/icon" "toggle-left" }}
+                    {{ partial "helper/icon" "toggle-right" }}
+                    <span>{{ T "darkMode" }}</span>
+                </li>
                 {{ end }}
             </ol>
         </li>
