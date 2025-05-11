@@ -36,7 +36,7 @@ icon = "link"
 [[main]]
 identifier = "archives"
 name = "归档"
-url = "/archives/"
+url = "/zh-cn/archives/"
 weight = 2
 [main.params]
 icon = "archives"
@@ -44,7 +44,7 @@ icon = "archives"
 [[main]]
 identifier = "search"
 name = "搜索"
-url = "/search/"
+url = "/zh-cn/search/"
 weight = 3
 [main.params]
 icon = "search"
@@ -52,7 +52,7 @@ icon = "search"
 [[main]]
 identifier = "links"
 name = "链接"
-url = "/links/"
+url = "/zh-cn/links/"
 weight = 4
 [main.params]
 icon = "link"
