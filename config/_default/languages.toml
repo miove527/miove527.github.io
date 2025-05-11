@@ -1,6 +1,10 @@
 # Rename this file to languages.toml to enable multilingual support
+[zh-cn]
+languageName = "简体中文"
+title = "Miove 杂记"
+weight = 1
 [en]
 languageName = "English"
 languagedirection = "ltr"
-title = "Example Site"
-weight = 1
+title = "Miove's Blog"
+weight = 2
