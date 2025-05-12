@@ -6,7 +6,7 @@ menu:
     main:
         weight: 2
         params: 
-            icon: about
+            icon: user
 ---
 
 这是一个中文简介。

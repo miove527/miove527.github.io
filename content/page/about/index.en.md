@@ -6,7 +6,7 @@ menu:
     main:
         weight: 2
         params: 
-            icon: about
+            icon: user
 ---
 
 Here is an introduction about me.
