@@ -4,7 +4,7 @@ date: 2023-10-10
 slug: "about"
 menu:
     main:
-        weight: 2
+        weight: 5
         params: 
             icon: user
 ---
