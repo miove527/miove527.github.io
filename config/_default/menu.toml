@@ -9,6 +9,14 @@
 
 # 英文菜单
 [[main]]
+identifier = "home"
+name = "Home"
+url = "/en/"
+weight = 1
+[main.params]
+icon = "home"
+
+[[main]]
 identifier = "archives"
 name = "Archives"
 url = "/en/archives/"
@@ -33,6 +41,14 @@ weight = 4
 icon = "link"
 
 # 中文菜单
+[[main]]
+identifier = "home"
+name = "首页"
+url = "/zh-cn/"
+weight = 1
+[main.params]
+icon = "home"
+
 [[main]]
 identifier = "archives"
 name = "归档"
