@@ -16,37 +16,37 @@ weight = 1
 [main.params]
 icon = "home"
 
-[[main]]
-identifier = "archives"
-name = "归档"
-url = "/zh-cn/archives/"
-weight = 2
-[main.params]
-icon = "archives"
+# [[main]]
+# identifier = "archives"
+# name = "归档"
+# url = "/zh-cn/archives/"
+# weight = 2
+# [main.params]
+# icon = "archives"
 
-[[main]]
-identifier = "search"
-name = "搜索"
-url = "/zh-cn/search/"
-weight = 3
-[main.params]
-icon = "search"
+# [[main]]
+# identifier = "search"
+# name = "搜索"
+# url = "/zh-cn/search/"
+# weight = 3
+# [main.params]
+# icon = "search"
 
-[[main]]
-identifier = "links"
-name = "链接"
-url = "/zh-cn/links/"
-weight = 4
-[main.params]
-icon = "link"
+# [[main]]
+# identifier = "links"
+# name = "链接"
+# url = "/zh-cn/links/"
+# weight = 4
+# [main.params]
+# icon = "link"
 
-[[main]]
-identifier = "gua"
-name = "关于"
-url = "/zh-cn/about/"
-weight = 5
-[main.params]
-icon = "user"
+# [[main]]
+# identifier = "gua"
+# name = "关于"
+# url = "/zh-cn/about/"
+# weight = 5
+# [main.params]
+# icon = "user"
 
 
 
