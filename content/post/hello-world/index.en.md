@@ -6,7 +6,8 @@ date: 2023-10-10 00:00:00+0000
 # image: ./cover.jpg
 tags:
     - Example
-weight: 1       # You can add weight to some posts to override the default sorting (date descending)
+# weight: 1
+# You can add weight to some posts to override the default sorting (date descending)
 ---
 
 Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!
