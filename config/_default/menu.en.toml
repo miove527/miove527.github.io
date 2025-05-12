@@ -8,45 +8,45 @@
 #newtab = true
 
 # 英文菜单
-[[main]]
-identifier = "home"
-name = "Home"
-url = "/en/"
-weight = 1
-[main.params]
-icon = "home"
+# [[main]]
+# identifier = "home"
+# name = "Home"
+# url = "/en/"
+# weight = 1
+# [main.params]
+# icon = "home"
 
-[[main]]
-identifier = "archives"
-name = "Archives"
-url = "/en/archives/"
-weight = 2
-[main.params]
-icon = "archives"
+# [[main]]
+# identifier = "archives"
+# name = "Archives"
+# url = "/en/archives/"
+# weight = 2
+# [main.params]
+# icon = "archives"
 
-[[main]]
-identifier = "search"
-name = "Search"
-url = "/en/search/"
-weight = 3
-[main.params]
-icon = "search"
+# [[main]]
+# identifier = "search"
+# name = "Search"
+# url = "/en/search/"
+# weight = 3
+# [main.params]
+# icon = "search"
 
-[[main]]
-identifier = "links"
-name = "Links"
-url = "/en/links/"
-weight = 4
-[main.params]
-icon = "link"
+# [[main]]
+# identifier = "links"
+# name = "Links"
+# url = "/en/links/"
+# weight = 4
+# [main.params]
+# icon = "link"
 
-[[main]]
-identifier = "about"
-name = "About"
-url = "/en/about/"
-weight = 5
-[main.params]
-icon = "user"
+# [[main]]
+# identifier = "about"
+# name = "About"
+# url = "/en/about/"
+# weight = 5
+# [main.params]
+# icon = "user"
 
 
 [[social]]
