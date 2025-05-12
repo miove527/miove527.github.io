@@ -1,8 +1,10 @@
 ---
 title: Math Typesetting
 description: Math typesetting using KaTeX
-date: 2023-08-24 00:00:00+0000
+date: 2023-10-10 00:00:00+0000
 math: true
+tags:
+    - Example
 ---
 
 Stack has built-in support for math typesetting using [KaTeX](https://katex.org/).
