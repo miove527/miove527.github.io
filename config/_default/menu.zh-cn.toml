@@ -1,0 +1,68 @@
+# Configure main menu and social menu
+#[[main]]
+#identifier = "home"
+#name = "Home"
+#url = "/"
+#[main.params]
+#icon = "home"
+#newtab = true
+
+# 中文菜单
+[[main]]
+identifier = "home"
+name = "首页"
+url = "/zh-cn/"
+weight = 1
+[main.params]
+icon = "home"
+
+[[main]]
+identifier = "archives"
+name = "归档"
+url = "/zh-cn/archives/"
+weight = 2
+[main.params]
+icon = "archives"
+
+[[main]]
+identifier = "search"
+name = "搜索"
+url = "/zh-cn/search/"
+weight = 3
+[main.params]
+icon = "search"
+
+[[main]]
+identifier = "links"
+name = "链接"
+url = "/zh-cn/links/"
+weight = 4
+[main.params]
+icon = "link"
+
+[[main]]
+identifier = "gua"
+name = "关于"
+url = "/zh-cn/about/"
+weight = 5
+[main.params]
+icon = "user"
+
+
+
+[[social]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/CaiJimmy/hugo-theme-stack"
+
+[social.params]
+icon = "brand-github"
+
+[[social]]
+identifier = "rss"
+name = "RSS"
+url = "/index.xml"
+
+[social.params]
+icon = "rss"
+
