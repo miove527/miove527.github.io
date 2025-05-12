@@ -83,3 +83,11 @@ url = "https://github.com/CaiJimmy/hugo-theme-stack"
 [social.params]
 icon = "brand-github"
 
+[[social]]
+identifier = "rss"
+name = "RSS"
+url = "/index.xml"
+
+[social.params]
+icon = "rss"
+
