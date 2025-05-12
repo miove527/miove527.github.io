@@ -1,7 +1,6 @@
 ---
 title: "About"
 date: 2023-10-10
-layout: "about"
 slug: "about"
 menu:
     main:
