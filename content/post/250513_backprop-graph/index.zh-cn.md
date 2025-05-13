@@ -2,7 +2,7 @@
 title: 反向传播与计算图
 description: 前向传播
 date:  2025-05-13
-img: calc-graph.png
+image: calc-graph.png
 # slug:  backprop-graph
 categories:
     - d2l
