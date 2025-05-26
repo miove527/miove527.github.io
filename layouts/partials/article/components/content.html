@@ -4,6 +4,7 @@
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="{{.Site.BaseURL}}js/kity.min.js"></script>
 <script src="{{.Site.BaseURL}}js/kityminder.core.min.js"></script>
 <script src="{{.Site.BaseURL}}js/mindmap.js"></script>
