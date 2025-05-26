@@ -3,3 +3,9 @@
     {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 </section>
+
+<script src="{{.Site.BaseURL}}js/kity.min.js"></script>
+<script src="{{.Site.BaseURL}}js/kityminder.core.min.js"></script>
+<script src="{{.Site.BaseURL}}js/mindmap.js"></script>
+<link href="{{.Site.BaseURL}}css/kityminder.core.css" rel="stylesheet">
+<link href="{{.Site.BaseURL}}css/mindmap.css" rel="stylesheet">

@@ -3,6 +3,7 @@ title: 第一次尝试
 description: Create Blog 1
 date: 2025-05-10 00:37:00+0000
 image: lib.jpg
+mindmap: true
 translationKey: "first"
 tags: 
     - markdown
