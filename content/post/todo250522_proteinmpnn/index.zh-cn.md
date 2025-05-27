@@ -2,8 +2,9 @@
 title: Robust deep learning–based protein sequence design using ProteinMPNN
 description: ProteinMPNN
 date:  2025-05-22
+draft: true
 # image: calc-graph.png
-# slug:  backprop-graph
+mindmap: false
 categories:
     - AI4S
     - Literature
