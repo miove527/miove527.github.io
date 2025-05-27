@@ -1,4 +1,16 @@
-
+---
+title: shift
+description: shift
+date:  2025-05-19
+draft: true
+# image: calc-graph.png
+mindmap: false
+translationKey: "shift"
+categories:
+    - D2L
+tags : 
+    - shift
+---
 
 
 # 分布偏移

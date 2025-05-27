@@ -6,6 +6,7 @@ date:  2025-05-22
 # slug:  backprop-graph
 categories:
     - AI4S
+    - Literature
 tags : 
     - ProteinMPNN
     - Protein

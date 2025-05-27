@@ -1,4 +1,17 @@
-
+---
+title: LaTeX + TikZ绘制图形
+description: LaTeX + TikZ绘制图形
+date:  2025-05-22
+draft: true
+# image: calc-graph.png
+mindmap: false
+translationKey: "graph-tikz"
+categories:
+    - LaTeX
+tags : 
+    - TikZ
+    - Graph
+---
 
 
 

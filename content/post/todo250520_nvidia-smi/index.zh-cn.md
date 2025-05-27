@@ -1,4 +1,17 @@
-
+---
+title: nvidia-smi
+description: nvidia-smi
+date:  2025-05-20
+draft: true
+# image: calc-graph.png
+mindmap: false
+translationKey: "nvidia-smi"
+categories:
+    - GPU
+tags : 
+    - GPU
+    - nvidia-smi
+---
 
 
 

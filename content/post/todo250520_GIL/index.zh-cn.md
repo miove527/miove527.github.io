@@ -1,4 +1,17 @@
-
+---
+title: GIL
+description: GIL
+date:  2025-05-20
+draft: true
+# image: calc-graph.png
+mindmap: false
+translationKey: "GIL"
+categories:
+    - D2L
+tags : 
+    - Python
+    - GIL
+---
 
 全局解释器锁（Global Interpreter Lock，简称GIL）是 Python 解释器（尤其是 CPython）中的一个机制。它的作用是**同一时刻只允许一个线程执行 Python 字节码**，即使你的程序有多个线程，也只能有一个线程真正“跑”Python代码。
 

@@ -2,10 +2,13 @@
 title: Denovo design of protein structure and function with RFdiffusion
 description: RFdiffusion
 date:  2025-05-15
+draft: true
 # image: calc-graph.png
-# slug:  backprop-graph
+mindmap: false
+translationKey: "rfdiffusion"
 categories:
     - AI4S
+    - Literature
 tags : 
     - RFdiffusion
     - Protein

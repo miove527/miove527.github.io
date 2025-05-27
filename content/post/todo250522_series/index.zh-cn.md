@@ -1,4 +1,16 @@
-
+---
+title: prediction
+description: prediction
+date:  2025-05-22
+draft: true
+# image: calc-graph.png
+mindmap: false
+translationKey: "series"
+categories:
+    - D2L
+tags : 
+    - prediction
+---
 
 
 随着 step（预测步数）增大，误差变大的原因主要有两个：
