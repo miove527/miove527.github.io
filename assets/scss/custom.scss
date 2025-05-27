@@ -7,3 +7,50 @@
     align-items: center;
     gap: var(--menu-icon-separation);
 }
+
+.widget--toc {
+    #TableOfContents {
+        max-height: 65vh;
+
+        ol,
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin: 10px 10px;
+
+            & > ol,
+            & > ul {
+                margin-top: 10px;
+                padding-left: 10px;
+                margin-bottom: -5px;
+
+                & > li:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+html{
+    ::-webkit-scrollbar {
+        width: 20px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background-color: #d6dee1;
+        border-radius: 20px;
+        border: 6px solid transparent;
+        background-clip: content-box;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #a8bbbf;
+      }
+}
