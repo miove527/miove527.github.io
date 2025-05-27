@@ -1,7 +1,7 @@
 ---
 title: 建站参考
 description: Hugo Stack
-date: 2025-05-10 00:00:00+0000
+date: 2025-05-12 00:00:00+0000
 draft: false
 # image: lib.jpg
 mindmap: true
