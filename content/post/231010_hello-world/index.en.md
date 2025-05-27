@@ -2,7 +2,7 @@
 title: Hello World
 description: Welcome to Hugo Theme Stack
 slug: hello-world
-date: 2023-10-10 00:00:00+0000
+date: 2023-10-10
 # image: ./cover.jpg
 tags:
     - Example

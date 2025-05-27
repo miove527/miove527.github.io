@@ -1,7 +1,7 @@
 ---
 title: Image gallery
 description: Create beautiful interactive image gallery using Markdown
-date: 2023-10-10 00:00:00+0000
+date: 2023-10-10
 tags:
     - Example
 # image: ./2.jpg

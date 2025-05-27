@@ -1,7 +1,7 @@
 ---
 title: 循环神经网络 RNN
 description: mindmap
-date: 2025-05-27 22:00:00+0000
+date: 2025-05-27
 draft: false
 # image: lib.jpg
 mindmap: true
