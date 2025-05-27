@@ -5,7 +5,7 @@ date:  2025-05-13
 image: calc-graph.png
 # slug:  backprop-graph
 categories:
-    - d2l
+    - D2L
 tags : 
     - backprop
 ---

@@ -5,11 +5,11 @@ date: 2025-05-28 00:00:00+0000
 draft: false
 # image: lib.jpg
 mindmap: true
-translationKey: "rnn"
-tags: 
-    - RNN
+translationKey: "rnn-architecture"
 categories:
     - D2L
+tags: 
+    - RNN
 ---
 
 
