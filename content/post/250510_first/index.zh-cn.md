@@ -35,3 +35,8 @@ $$
     - 另一个一级节点
         - 二级节点3
 {{< /mind-md >}}
+
+## pdf
+
+{{< embed-pdf url="./MRI.pdf" >}}
+
