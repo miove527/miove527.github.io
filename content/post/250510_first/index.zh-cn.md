@@ -38,5 +38,5 @@ $$
 
 ## pdf
 
-{{< embed-pdf url="./MRI.pdf" >}}
+{{< embed-pdf url="../250605_MRI/MRI.pdf" >}}
 
