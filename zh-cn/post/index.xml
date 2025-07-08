@@ -1,0 +1,1416 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Miove 杂记</title><link>https://miove527.github.io/zh-cn/post/</link><description>Recent content in Posts on Miove 杂记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 05 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://miove527.github.io/zh-cn/post/index.xml" rel="self" type="application/rss+xml"/><item><title>MRI成像的物理基础及实验</title><link>https://miove527.github.io/zh-cn/p/mri%E6%88%90%E5%83%8F%E7%9A%84%E7%89%A9%E7%90%86%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%9E%E9%AA%8C/</link><pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate><guid>https://miove527.github.io/zh-cn/p/mri%E6%88%90%E5%83%8F%E7%9A%84%E7%89%A9%E7%90%86%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%9E%E9%AA%8C/</guid><description>&lt;script type="text/javascript" src= '/js/pdf-js/build/pdf.js'>&lt;/script>
+&lt;style>
+#embed-pdf-container {
+position: relative;
+width: 100%;
+height: auto;
+min-height: 20vh;
+}
+.pdf-canvas {
+border: 1px solid black;
+direction: ltr;
+width: 100%;
+height: auto;
+display: none;
+}
+#the-canvas {
+border: 1px solid black;
+direction: ltr;
+width: 100%;
+height: auto;
+display: none;
+}
+.pdf-loadingWrapper {
+display: none;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 350px;
+}
+.pdf-loading {
+display: inline-block;
+width: 50px;
+height: 50px;
+border: 3px solid #d2d0d0;;
+border-radius: 50%;
+border-top-color: #383838;
+animation: spin 1s ease-in-out infinite;
+-webkit-animation: spin 1s ease-in-out infinite;
+}
+#overlayText {
+word-wrap: break-word;
+display: grid;
+justify-content: end;
+}
+#overlayText a {
+position: relative;
+top: 10px;
+right: 4px;
+color: #000;
+margin: auto;
+background-color: #eeeeee;
+padding: 0.3em 1em;
+border: solid 2px;
+border-radius: 12px;
+border-color: #00000030;
+text-decoration: none;
+}
+#overlayText svg {
+height: clamp(1em, 2vw, 1.4em);
+width: clamp(1em, 2vw, 1.4em);
+}
+@keyframes spin {
+to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+to { -webkit-transform: rotate(360deg); }
+}
+&lt;/style>&lt;div class="embed-pdf-container" id="embed-pdf-container-354e0ae5">
+&lt;div class="pdf-loadingWrapper" id="pdf-loadingWrapper-354e0ae5">
+&lt;div class="pdf-loading" id="pdf-loading-354e0ae5">&lt;/div>
+&lt;/div>
+&lt;div id="overlayText">
+&lt;a href="./MRI.pdf" aria-label="Download" download>
+&lt;svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+&lt;path d="M9 13c.3 0 .5-.1.7-.3L15.4 7 14 5.6l-4 4V1H8v8.6l-4-4L2.6 7l5.7 5.7c.2.2.4.3.7.3zm-7 2h14v2H2z" />
+&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;canvas class="pdf-canvas" id="pdf-canvas-354e0ae5">&lt;/canvas>
+&lt;/div>
+&lt;div class="pdf-paginator" id="pdf-paginator-354e0ae5">
+&lt;button id="pdf-prev-354e0ae5">Previous&lt;/button>
+&lt;button id="pdf-next-354e0ae5">Next&lt;/button> &amp;nbsp; &amp;nbsp;
+&lt;span>
+&lt;span class="pdf-pagenum" id="pdf-pagenum-354e0ae5">&lt;/span> / &lt;span class="pdf-pagecount" id="pdf-pagecount-354e0ae5">&lt;/span>
+&lt;/span>
+&lt;a class="pdf-source" id="pdf-source-354e0ae5" href="./MRI.pdf">[pdf]&lt;/a>
+&lt;/div>
+&lt;noscript>
+View the PDF file &lt;a class="pdf-source" id="pdf-source-noscript-354e0ae5" href="./MRI.pdf">here&lt;/a>.
+&lt;/noscript>
+&lt;script type="text/javascript">
+(function(){
+var url = '.\/MRI.pdf';
+var hidePaginator = "" === "true";
+var hideLoader = "" === "true";
+var selectedPageNum = parseInt("") || 1;
+var pdfjsLib = window['pdfjs-dist/build/pdf'];
+if (pdfjsLib.GlobalWorkerOptions.workerSrc == '')
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https:\/\/miove527.github.io\/" + 'js/pdf-js/build/pdf.worker.js';
+var pdfDoc = null,
+pageNum = selectedPageNum,
+pageRendering = false,
+pageNumPending = null,
+scale = 3,
+canvas = document.getElementById('pdf-canvas-354e0ae5'),
+ctx = canvas.getContext('2d'),
+paginator = document.getElementById("pdf-paginator-354e0ae5"),
+loadingWrapper = document.getElementById('pdf-loadingWrapper-354e0ae5');
+showPaginator();
+showLoader();
+function renderPage(num) {
+pageRendering = true;
+pdfDoc.getPage(num).then(function(page) {
+var viewport = page.getViewport({scale: scale});
+canvas.height = viewport.height;
+canvas.width = viewport.width;
+var renderContext = {
+canvasContext: ctx,
+viewport: viewport
+};
+var renderTask = page.render(renderContext);
+renderTask.promise.then(function() {
+pageRendering = false;
+showContent();
+if (pageNumPending !== null) {
+renderPage(pageNumPending);
+pageNumPending = null;
+}
+});
+});
+document.getElementById('pdf-pagenum-354e0ae5').textContent = num;
+}
+function showContent() {
+loadingWrapper.style.display = 'none';
+canvas.style.display = 'block';
+}
+function showLoader() {
+if(hideLoader) return
+loadingWrapper.style.display = 'flex';
+canvas.style.display = 'none';
+}
+function showPaginator() {
+if(hidePaginator) return
+paginator.style.display = 'block';
+}
+function queueRenderPage(num) {
+if (pageRendering) {
+pageNumPending = num;
+} else {
+renderPage(num);
+}
+}
+function onPrevPage() {
+if (pageNum &lt;= 1) {
+return;
+}
+pageNum--;
+queueRenderPage(pageNum);
+}
+document.getElementById('pdf-prev-354e0ae5').addEventListener('click', onPrevPage);
+function onNextPage() {
+if (pageNum >= pdfDoc.numPages) {
+return;
+}
+pageNum++;
+queueRenderPage(pageNum);
+}
+document.getElementById('pdf-next-354e0ae5').addEventListener('click', onNextPage);
+pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+pdfDoc = pdfDoc_;
+var numPages = pdfDoc.numPages;
+document.getElementById('pdf-pagecount-354e0ae5').textContent = numPages;
+if(pageNum > numPages) {
+pageNum = numPages
+}
+renderPage(pageNum);
+});
+})();
+&lt;/script>
+&lt;h1 id="核子自旋">核子自旋
+&lt;/h1>&lt;p>两种运动形式 $\to$ 核磁矩 $\to$ 旋磁比、磁化强度矢量&lt;/p>
+&lt;ul>
+&lt;li>轨道运动：轨道角动量&lt;/li>
+&lt;li>自旋运动：自旋角动量&lt;/li>
+&lt;/ul>
+&lt;p>$\to$ 核子本征角动量：二者矢量和
+$\to$ 原子核本征角动量：核子本征角动量的矢量和
+$\to$ 核自旋量子数&lt;/p>
+&lt;h1 id="拉莫尔进动">拉莫尔进动
+&lt;/h1>&lt;p>原子核处于外磁场中，本征角动量和核磁矩按某一角频率/圆频率进动。&lt;/p>
+&lt;h1 id="原子核塞曼分裂">原子核塞曼分裂
+&lt;/h1>&lt;p>在外磁场中原子核的能级分裂。
+Bolzmann分布 $\to$ 能级分裂的能量差、不同能级的粒子数比&lt;/p>
+&lt;h1 id="射频场">射频场
+&lt;/h1>&lt;p>频率在射频范围的交变电磁场，产生振荡磁场。&lt;/p>
+&lt;ul>
+&lt;li>硬脉冲&lt;/li>
+&lt;li>软脉冲&lt;/li>
+&lt;/ul>
+&lt;h1 id="核磁共振">核磁共振
+&lt;/h1>&lt;p>原子核吸收等于能级分裂能量差的射频场能量，发生跃迁。
+$\to$ 磁化强度矢量改变&lt;/p>
+&lt;h1 id="弛豫">弛豫
+&lt;/h1>&lt;p>粒子受到激发后，以非辐射的方式回到基态而达到 Bolzmann 平衡。&lt;/p>
+&lt;ul>
+&lt;li>横向弛豫&lt;/li>
+&lt;li>纵向弛豫&lt;/li>
+&lt;/ul>
+&lt;h1 id="mr信号">MR信号
+&lt;/h1>&lt;ul>
+&lt;li>FID 自由感应衰减信号&lt;/li>
+&lt;li>SE 自旋回波信号&lt;/li>
+&lt;li>GRE 梯度回波信号（todo）&lt;/li>
+&lt;li>EPI 回波平面成像信号（todo）&lt;/li>
+&lt;li>Q-CPMG 序列&lt;/li>
+&lt;/ul></description></item><item><title>循环神经网络 RNN</title><link>https://miove527.github.io/zh-cn/p/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-rnn/</link><pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate><guid>https://miove527.github.io/zh-cn/p/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-rnn/</guid><description>&lt;ul>
+&lt;li>预测策略
+&lt;ul>
+&lt;li>自回归模型：长度为$\tau$的时间跨度&lt;/li>
+&lt;li>隐变量自回归模型：保留一些对过去观测的总结$h_t$，同时更新预测$\hat{x}_t$和总结$h_t$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>预测
+&lt;ul>
+&lt;li>warm-up 预热&lt;/li>
+&lt;li>单步预测&lt;/li>
+&lt;li>$k$步预测&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>文本预处理
+&lt;ul>
+&lt;li>token 词元
+&lt;ul>
+&lt;li>&lt;code>&amp;lt;unk&amp;gt;&lt;/code> 未知词元&lt;/li>
+&lt;li>&lt;code>&amp;lt;pad&amp;gt;&lt;/code> 填充词元&lt;/li>
+&lt;li>&lt;code>&amp;lt;bos&amp;gt;&lt;/code> 序列开始词元&lt;/li>
+&lt;li>&lt;code>&amp;lt;eos&amp;gt;&lt;/code> 序列结束词元&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>vacabulary 词表&lt;/li>
+&lt;li>corpus 语料&lt;/li>
+&lt;li>stop words 停用词&lt;/li>
+&lt;li>one-hot 编码&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>序列采样策略
+&lt;ul>
+&lt;li>顺序分区
+&lt;ul>
+&lt;li>每个 epoch 开始时，初始化隐状态&lt;/li>
+&lt;li>batch
+&lt;ul>
+&lt;li>
+&lt;ol>
+&lt;li>分离梯度&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="2">
+&lt;li>初始化第 1 个样本的隐状态：上个 batch 最后 1 个样本的隐状态&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>随机采样
+&lt;ul>
+&lt;li>每个 epoch 重新初始化隐状态&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>条件概率
+&lt;ul>
+&lt;li>马尔可夫模型&lt;/li>
+&lt;li>$n$-gram 语法模型&lt;/li>
+&lt;li>拉普拉斯平滑&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>梯度
+&lt;ul>
+&lt;li>梯度裁剪&lt;/li>
+&lt;li>时间反向传播 BPTT
+&lt;ul>
+&lt;li>完全计算&lt;/li>
+&lt;li>截断时间步
+&lt;ul>
+&lt;li>侧重短期影响&lt;/li>
+&lt;li>轻度正则化&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>随机截断
+&lt;ul>
+&lt;li>时间步数↑：梯度估计方差↑，抵消精度&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>衡量模型质量
+&lt;ul>
+&lt;li>perplexity 困惑度
+&lt;ul>
+&lt;li>$\exp\left(-\frac{1}{n} \sum_{t=1}^n \log P(x_t \mid x_{t-1}, \ldots, x_1)\right)$&lt;/li>
+&lt;li>下一个词元的实际选择数的调和平均数&lt;/li>
+&lt;li>最理想：完美估计， perplexity = 1&lt;/li>
+&lt;li>最差：全部错误，perplexity = $+\infty$&lt;/li>
+&lt;li>baseline 基线：完全随机， perplexity = $|\mathcal{V}|$（唯一的词表大小）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div id="mymindmap" class="mindmap mindmap-md">&lt;ul>
+&lt;li>神经网络
+&lt;ul>
+&lt;li>无隐状态的神经网络
+&lt;ul>
+&lt;li>隐藏层
+&lt;ul>
+&lt;li>输入&lt;/li>
+&lt;li>输出&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>有隐状态的循环神经网络 RNN
+&lt;ul>
+&lt;li>组成
+&lt;ul>
+&lt;li>隐藏层：隐状态/隐藏变量
+&lt;ul>
+&lt;li>计算步骤
+&lt;ul>
+&lt;li>拼接：当前时间步的输入+前一时间步的隐状态&lt;/li>
+&lt;li>带有激活函数的全连接层&lt;/li>
+&lt;li>输出当前时间步的隐状态&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层：仅使用隐状态&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>隐藏层架构
+&lt;ul>
+&lt;li>门控循环单元 GRU
+&lt;ul>
+&lt;li>输入
+&lt;ul>
+&lt;li>当前时间步的输入&lt;/li>
+&lt;li>上一个时间步的隐状态
+&lt;ul>
+&lt;li>候选隐状态&lt;/li>
+&lt;li>最终隐状态&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>重置门 reset gate
+&lt;ul>
+&lt;li>是否忘记上一个时间步的隐状态
+&lt;ul>
+&lt;li>0：清零记忆，只看现在输入
+&lt;ul>
+&lt;li>类：MLP 多层感知机&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>1：完整保留记忆
+&lt;ul>
+&lt;li>类：普通RNN&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>更新门 update gate
+&lt;ul>
+&lt;li>决定当前时间步的隐状态组成
+&lt;ul>
+&lt;li>1：原来记忆（上一个时间步的隐状态）&lt;/li>
+&lt;li>0：新的记忆（新的候选隐状态）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>长短期记忆网络 LSTM
+&lt;ul>
+&lt;li>输入
+&lt;ul>
+&lt;li>当前时间步的输入&lt;/li>
+&lt;li>上一个时间步的记忆元&lt;/li>
+&lt;li>上一个时间步的隐状态
+&lt;ul>
+&lt;li>隐状态&lt;/li>
+&lt;li>输出门 output gate
+&lt;ul>
+&lt;li>控制隐状态使用多少长期记忆&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>记忆元/细胞状态 memory cell：长期记忆
+&lt;ul>
+&lt;li>候选记忆元 candidate memory cell&lt;/li>
+&lt;li>输入门 input gate
+&lt;ul>
+&lt;li>决定向长期记忆里写入多少当前输入&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>遗忘门 forget gate
+&lt;ul>
+&lt;li>决定遗忘多少长期记忆&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>深度循环神经网络
+&lt;ul>
+&lt;li>隐藏层（数量L）&lt;/li>
+&lt;li>输出层：基于最后一层的隐状态&lt;/li>
+&lt;li>深度门控循环神经网络&lt;/li>
+&lt;li>深度长短期记忆神经网络&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>双向循环神经网络 bidirectional RNN
+&lt;ul>
+&lt;li>隐马尔可夫模型 HMM
+&lt;ul>
+&lt;li>动态规划
+&lt;ul>
+&lt;li>前向递归&lt;/li>
+&lt;li>后向递归&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>隐藏层
+&lt;ul>
+&lt;li>隐状态
+&lt;ul>
+&lt;li>前向隐状态&lt;/li>
+&lt;li>后向隐状态&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层&lt;/li>
+&lt;li>缺点
+&lt;ul>
+&lt;li>计算速度慢、内存消耗大&lt;/li>
+&lt;li>预测精度差：下文未知&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;h1 id="无隐状态的神经网络">无隐状态的神经网络
+&lt;/h1>&lt;ul>
+&lt;li>隐藏层
+&lt;ul>
+&lt;li>输入 $\mathbf{H} = \phi(\mathbf{X} \mathbf{W}_{xh} + \mathbf{b}_h)$&lt;/li>
+&lt;li>输出 $\mathbf{O} = \mathbf{H} \mathbf{W}_{hq} + \mathbf{b}_q$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="有隐状态的循环神经网络-rnn">有隐状态的&lt;mark>循环神经网络&lt;/mark> RNN
+&lt;/h1>&lt;h2 id="组成">组成
+&lt;/h2>&lt;ul>
+&lt;li>隐藏层：隐状态/隐藏变量 $\mathbf{H}_t$
+&lt;ul>
+&lt;li>$\mathbf{H}_t = \phi(\mathbf{X}_t \mathbf{W}_{xh} + \mathbf{H}_{t-1} \mathbf{W}_{hh} + \mathbf{b}_h)$&lt;/li>
+&lt;li>计算步骤
+&lt;ul>
+&lt;li>拼接当前时间步 $t$ 的输入 $\mathbf{X}_t$ 和前一时间步 $t-1$ 的隐状态 $\mathbf{H}_{t-1}$&lt;/li>
+&lt;li>带有激活函数 $\phi$ 的全连接层&lt;/li>
+&lt;li>输出当前时间步 $t$ 的隐状态 $\mathbf{H}_t$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层：仅使用&lt;mark>隐状态&lt;/mark>
+&lt;ul>
+&lt;li>$\mathbf{O}_t = \mathbf{H}_t \mathbf{W}_{hq} + \mathbf{b}_q$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="隐藏层架构">隐藏层架构
+&lt;/h2>&lt;h3 id="门控循环单元-gru">门控循环单元 GRU
+&lt;/h3>&lt;ul>
+&lt;li>输入
+&lt;ul>
+&lt;li>当前时间步的输入 $\mathbf{X}_t$&lt;/li>
+&lt;li>上一个时间步的&lt;mark>隐状态&lt;/mark> $\mathbf{H}_{t-1}$
+&lt;ul>
+&lt;li>候选隐状态 $\tilde{\mathbf{H}}_t$
+&lt;ul>
+&lt;li>$\tilde{\mathbf{H}}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xh} + \mathbf{R}_t \odot \mathbf{H}_{t-1} \mathbf{W}_{hh} + \mathbf{b}_h)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>最终隐状态 $\mathbf{H}_t$
+&lt;ul>
+&lt;li>$\mathbf{H}_t = \mathbf{Z}_t \odot \mathbf{H}_{t-1} + (1 - \mathbf{Z}_t) \odot \tilde{\mathbf{H}}_t$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>重置门 reset gate
+&lt;ul>
+&lt;li>是否忘记上一个时间步的隐状态
+&lt;ul>
+&lt;li>0：清零记忆，只看现在输入
+&lt;ul>
+&lt;li>类：MLP 多层感知机&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>1：完整保留记忆
+&lt;ul>
+&lt;li>类：普通RNN&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>$\mathbf{R}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xr} + \mathbf{H}_{t-1} \mathbf{W}_{hr} + \mathbf{b}_r)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>更新门 update gate
+&lt;ul>
+&lt;li>决定当前时间步的隐状态组成
+&lt;ul>
+&lt;li>1：原来记忆（上一个时间步的隐状态）&lt;/li>
+&lt;li>0：新的记忆（新的候选隐状态）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>$\mathbf{Z}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xz} + \mathbf{H}_{t-1} \mathbf{W}_{hz} + \mathbf{b}_z)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="长短期记忆网络-lstm">长短期记忆网络 LSTM
+&lt;/h3>&lt;ul>
+&lt;li>输入
+&lt;ul>
+&lt;li>当前时间步的输入 $\mathbf{X}_t$&lt;/li>
+&lt;li>上一个时间步的记忆元 $\mathbf{C}_{t-1}$
+&lt;ul>
+&lt;li>$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde{\mathbf{C}}_t$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>上一个时间步的隐状态 $\mathbf{H}_{t-1}$
+&lt;ul>
+&lt;li>&lt;mark>隐状态&lt;/mark> $\mathbf{H}_t = \mathbf{O}_t \odot \tanh(\mathbf{C}_t)$&lt;/li>
+&lt;li>输出门 output gate
+&lt;ul>
+&lt;li>控制隐状态使用多少长期记忆&lt;/li>
+&lt;li>$\mathbf{O}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xo} + \mathbf{H}_{t-1} \mathbf{W}_{ho} + \mathbf{b}_o)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>记忆元/细胞状态 memory cell：长期记忆
+&lt;ul>
+&lt;li>$\mathbf{C}_t = \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde{\mathbf{C}}_t$&lt;/li>
+&lt;li>候选记忆元 candidate memory cell
+&lt;ul>
+&lt;li>$\tilde{\mathbf{C}}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xc} + \mathbf{H}_{t-1} \mathbf{W}_{hc} + \mathbf{b}_c)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输入门 input gate
+&lt;ul>
+&lt;li>决定向长期记忆里写入多少当前输入&lt;/li>
+&lt;li>$\mathbf{I}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xi} + \mathbf{H}_{t-1} \mathbf{W}_{hi} + \mathbf{b}_i)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>遗忘门 forget gate
+&lt;ul>
+&lt;li>决定遗忘多少长期记忆&lt;/li>
+&lt;li>$\mathbf{F}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xf} + \mathbf{H}_{t-1} \mathbf{W}_{hf} + \mathbf{b}_f)$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="深度循环神经网络">深度循环神经网络
+&lt;/h2>&lt;ul>
+&lt;li>隐藏层（数量$L$）
+&lt;ul>
+&lt;li>隐状态（$l^{th}$ 隐藏层）
+&lt;ul>
+&lt;li>$\mathbf{H}_t^{(l)}=\phi_l(\mathbf{H}_{t}^{(l-1)} \mathbf{W}_{xh}^{(l)} + \mathbf{H}_{t-1}^{(l)} \mathbf{W}_{hh}^{(l)} + \mathbf{b}_h^{(l)})$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层：基于最后一层的隐状态
+&lt;ul>
+&lt;li>$\mathbf{O}_t = \mathbf{H}_t^{(L)} \mathbf{W}_{hq} + \mathbf{b}_q$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>深度门控循环神经网络&lt;/li>
+&lt;li>深度长短期记忆神经网络&lt;/li>
+&lt;/ul>
+&lt;h2 id="双向循环神经网络-bidirectional-rnn">双向循环神经网络 bidirectional RNN
+&lt;/h2>&lt;ul>
+&lt;li>隐马尔可夫模型 HMM
+&lt;ul>
+&lt;li>动态规划
+&lt;ul>
+&lt;li>前向递归&lt;/li>
+&lt;li>后向递归&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>隐藏层
+&lt;ul>
+&lt;li>隐状态 $\mathbf{H}_t \in \mathbb{R}^{n \times 2h}$
+&lt;ul>
+&lt;li>前向隐状态 $\overrightarrow{\mathbf{H}}_t^{(f)} \in \mathbb{R}^{n \times h}$
+&lt;ul>
+&lt;li>$\overrightarrow{\mathbf{H}}_t = \phi(\mathbf{X}_t \mathbf{W}_{xh}^{(f)} + \overrightarrow{\mathbf{H}}_{t-1} \mathbf{W}_{hh}^{(f)} + \mathbf{b}_h^{(f)})$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>后向隐状态 $\overleftarrow{\mathbf{H}}_t^{(b)} \in \mathbb{R}^{n \times h}$
+&lt;ul>
+&lt;li>$\overleftarrow{\mathbf{H}}_t = \phi(\mathbf{X}_t \mathbf{W}_{xh}^{(b)} + \overleftarrow{\mathbf{H}}_{t+1} \mathbf{W}_{hh}^{(b)} + \mathbf{b}_h^{(b)})$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层
+&lt;ul>
+&lt;li>$\mathbf{O}_t = \mathbf{H}_t \mathbf{W}_{hq} + \mathbf{b}_q$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>缺点
+&lt;ul>
+&lt;li>计算速度慢、内存消耗大&lt;/li>
+&lt;li>预测精度差：下文未知&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>反向传播与计算图</title><link>https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/</link><pubDate>Tue, 13 May 2025 00:00:00 +0000</pubDate><guid>https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/</guid><description>&lt;img src="https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph.png" alt="Featured image of post 反向传播与计算图" />&lt;h1 id="前向传播">前向传播
+&lt;/h1>&lt;p>&lt;strong>前向传播&lt;/strong>（forward propagation）：按顺序（输入层$\to$输出层）计算和存储神经网络中每层的结果。&lt;/p>
+&lt;p>讨论示例：
+预设：隐藏层不包括偏置项&lt;/p>
+&lt;ul>
+&lt;li>输入样本$\mathbf{x}\in \mathbb{R}^d$&lt;/li>
+&lt;li>隐藏层的权重参数$\mathbf{W}^{(1)} \in \mathbb{R}^{h \times d}$&lt;/li>
+&lt;li>中间变量$\mathbf{z}= \mathbf{W}^{(1)} \mathbf{x}$
+&lt;ul>
+&lt;li>$\mathbf{z}\in \mathbb{R}^h$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>激活函数$\phi$&lt;/li>
+&lt;li>隐藏激活向量$\mathbf{h}= \phi (\mathbf{z})$
+&lt;ul>
+&lt;li>$\mathbf{h}\in \mathbb{R}^h$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层的权重参数$\mathbf{W}^{(2)} \in \mathbb{R}^{q \times h}$&lt;/li>
+&lt;li>输出层变量$\mathbf{o}= \mathbf{W}^{(2)} \mathbf{h}$
+&lt;ul>
+&lt;li>$\mathbf{o}\in \mathbb{R}^q$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>单个数据样本的损失项$L = l(\mathbf{o}, y)$
+&lt;ul>
+&lt;li>损失函数$l$&lt;/li>
+&lt;li>样本标签$y$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>正则化项$s = \frac{\lambda}{2} \left(\|\mathbf{W}^{(1)}\|_F^2 + \|\mathbf{W}^{(2)}\|_F^2\right)$
+&lt;ul>
+&lt;li>$L_2$正则化&lt;/li>
+&lt;li>超参数$\lambda$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>模型在给定数据样本上的正则化损失$J = L + s$
+&lt;ul>
+&lt;li>即此时的&lt;strong>目标函数&lt;/strong>（objective function）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph.png"
+width="1046"
+height="403"
+srcset="https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph_hu_568f4d7d7d2f2947.png 480w, https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph_hu_a2503a3b4588237d.png 1024w"
+loading="lazy"
+alt="计算图"
+class="gallery-image"
+data-flex-grow="259"
+data-flex-basis="622px"
+>&lt;/p>
+&lt;ul>
+&lt;li>正方形表示变量，圆圈表示操作符。&lt;/li>
+&lt;li>左下角表示输入，右上角表示输出。&lt;/li>
+&lt;li>箭头显示数据流的方向，主要是向右和向上。&lt;/li>
+&lt;/ul>
+&lt;h1 id="反向传播">反向传播
+&lt;/h1>&lt;p>&lt;strong>反向传播&lt;/strong>（backward propagation）：计算神经网络参数梯度的方法。
+根据微积分中的&lt;u>链式法则&lt;/u>，按相反的顺序从输出层到输入层遍历网络。&lt;/p>
+&lt;ul>
+&lt;li>存储计算某些参数梯度时所需的任何中间变量（偏导数）&lt;/li>
+&lt;li>$\text{prod}$运算符：在执行必要的操作（如换位和交换输入位置）后将其参数相乘。&lt;/li>
+&lt;li>目的：计算梯度$\frac{\partial J}{\partial \mathbf{W}^{(1)}}$和$\frac{\partial J}{\partial \mathbf{W}^{(2)}}$
+&lt;ul>
+&lt;li>先计算距离输出层更近的$\frac{\partial J}{\partial \mathbf{W}^{(2)}}$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+$$
+\begin{align*}
+\frac{\partial J}{\partial \mathbf{W}^{(2)}}
+&amp;= \frac{\partial J}{\partial L}\cdot \frac{\partial L}{\partial \mathbf{W}^{(2)}}
++\frac{\partial J}{\partial s}\cdot \frac{\partial s}{\partial \mathbf{W}^{(2)}} \\
+&amp;= 1\cdot \frac{\partial L}{\partial \mathbf{W}^{(2)}}
++\ 1\cdot \frac{\partial s}{\partial \mathbf{W}^{(2)}} \\
+&amp;= \frac{\partial L}{\partial \mathbf{o}} \cdot \frac{\partial \mathbf{o}}{\partial \mathbf{W}^{(2)}}
++ \lambda \mathbf{W}^{(2)}\\
+&amp;=\frac{\partial L}{\partial \mathbf{o}}
+\cdot \mathbf{h}^\top
++ \lambda \mathbf{W}^{(2)}\\
+\end{align*}
+$$$$
+\begin{align*}
+\frac{\partial J}{\partial \mathbf{W}^{(1)}}
+&amp;= \frac{\partial J}{\partial L}\cdot \frac{\partial L}{\partial \mathbf{W}^{(1)}}
++\frac{\partial J}{\partial s}\cdot \frac{\partial s}{\partial \mathbf{W}^{(1)}} \\
+&amp;= 1\cdot \frac{\partial L}{\partial \mathbf{W}^{(1)}}
++\ 1\cdot \frac{\partial s}{\partial \mathbf{W}^{(1)}} \\
+&amp;= \frac{\partial L}{\partial \mathbf{o}} \cdot \frac{\partial \mathbf{o}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=\frac{\partial L}{\partial \mathbf{o}}
+\cdot \frac{\partial \mathbf{o}}{\partial \mathbf{h}}
+\cdot \frac{\partial \mathbf{h}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=({\mathbf{W}^{(2)}}^\top \cdot \frac{\partial L}{\partial \mathbf{o}})
+\cdot \frac{\partial \mathbf{h}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=({\mathbf{W}^{(2)}}^\top \cdot \frac{\partial L}{\partial \mathbf{o}})
+\cdot \frac{\partial \mathbf{h}}{\partial \mathbf{z}}
+\cdot \frac{\partial \mathbf{z}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=({\mathbf{W}^{(2)}}^\top \cdot \frac{\partial L}{\partial \mathbf{o}})
+\odot \phi'\left(\mathbf{z}\right)
+\cdot \mathbf{x}^\top
++ \lambda \mathbf{W}^{(1)}\\
+\end{align*}
+$$&lt;p>由于$\frac{\partial J}{\partial L}=1$，故$\frac{\partial L}{\partial \mathbf{h}}$在数值上等于$\frac{\partial J}{\partial \mathbf{h}}$，下述$\frac{\partial J}{\partial \mathbf{h}}$、$\frac{\partial J}{\partial \mathbf{z}}$按此对应上述推导。&lt;/p>
+&lt;p>激活函数$\phi$是按元素计算的，计算中间变量$\mathbf{z}$的梯度$\frac{\partial J}{\partial \mathbf{z}} \in \mathbb{R}^h$
+需要使用按元素乘法运算符，用$\odot$表示：&lt;/p>
+$$
+\frac{\partial J}{\partial \mathbf{z}}
+= \text{prod}\left(\frac{\partial J}{\partial \mathbf{h}}, \frac{\partial \mathbf{h}}{\partial \mathbf{z}}\right)
+= \frac{\partial J}{\partial \mathbf{h}} \odot \phi'\left(\mathbf{z}\right)
+$$&lt;p>隐藏层输出的梯度$\frac{\partial J}{\partial \mathbf{h}} \in \mathbb{R}^h$由下式给出：&lt;/p>
+$$
+\frac{\partial J}{\partial \mathbf{h}}
+= \text{prod}\left(\frac{\partial J}{\partial \mathbf{o}}, \frac{\partial \mathbf{o}}{\partial \mathbf{h}}\right)
+= {\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}
+$$&lt;p>$J$ 是一个标量（损失函数的输出），$\mathbf{o}$ 是 $q$ 维向量，按照多元微积分，$\frac{\partial J}{\partial \mathbf{o}}$形状和 $\mathbf{o}$ 一致，即 $\frac{\partial J}{\partial \mathbf{o}} \in \mathbb{R}^q$；又$\mathbf{W}^{(2)} \in \mathbb{R}^{q \times h}$，故：
+&lt;/p>
+$$
+{{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}} \in \mathbb{R}^h
+$$&lt;blockquote>
+&lt;p>${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$与${\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$&lt;/p>&lt;/blockquote>
+&lt;p>在&lt;strong>反向传播的推导&lt;/strong>中，更常用${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$ 的写法，主要考虑以下：&lt;/p>
+&lt;ol>
+&lt;li>链式法则
+通过&lt;strong>上一层的梯度左乘该层权重的转置&lt;/strong>，得到每一层的梯度&lt;/li>
+&lt;li>与前向传播的结构对偶
+&lt;ul>
+&lt;li>前向传播：$\mathbf{o} = \mathbf{W}^{(2)} \mathbf{h}$&lt;/li>
+&lt;li>反向传播：$\frac{\partial J}{\partial \mathbf{h}} = {\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>对于$\mathbf{W}^{(2)} \in \mathbb{R}^{q \times h}$，为了在计算$\frac{\partial J}{\partial \mathbf{h}}$时形状匹配：&lt;/p>
+&lt;ul>
+&lt;li>$\frac{\partial J}{\partial \mathbf{h}} = {{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$：应将$\frac{\partial J}{\partial \mathbf{o}}$ 视作是 $q \times 1$ 的列向量（$\mathbb{R}^{q \times 1}$），得到$\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)} \in \mathbb{R}^{h \times 1}$&lt;/li>
+&lt;li>$\frac{\partial J}{\partial \mathbf{h}} = {\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$：应将$\frac{\partial J}{\partial \mathbf{o}}$ 视作是 $1 \times q$ 的行向量（$\mathbb{R}^{1 \times q}$），得到$\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)} \in \mathbb{R}^{1 \times h}$&lt;/li>
+&lt;/ul>
+&lt;p>&lt;u>区分行/列向量&lt;/u>，不是改变变量的本质维度，是为了在矩阵乘法等操作时形状能严格对齐。&lt;/p>
+&lt;p>但在&lt;strong>具体的编程实现&lt;/strong>时，${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$与${\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$很可能一致。&lt;/p>
+&lt;p>对于表述$\frac{\partial J}{\partial \mathbf{o}} \in \mathbb{R}^q$，只表示“$q$ 维实向量”，&lt;strong>不区分是行向量还是列向量&lt;/strong>，也不强调是1维还是2维（抽象意义上是1维向量）；而例如$\frac{\partial J}{\partial \mathbf{o}} \in \mathbb{R}^{q \times 1}$则明确表示“$q$ 行 $1$ 列的矩阵”，也就是列向量，在数学和编程实现中是2维的。&lt;/p>
+&lt;p>在实际编程（如 NumPy、PyTorch）中，&lt;/p>
+&lt;ul>
+&lt;li>$\mathbb{R}^q$ 通常对应 shape 为 &lt;code>(q,)&lt;/code> 的一维数组（向量）&lt;/li>
+&lt;li>$\mathbb{R}^{q \times 1}$ 对应 shape 为 &lt;code>(q, 1)&lt;/code> 的二维数组（列向量）&lt;/li>
+&lt;li>$\mathbb{R}^{1 \times q}$ 对应 shape 为 &lt;code>(1, q)&lt;/code> 的二维数组（行向量）&lt;/li>
+&lt;/ul>
+&lt;p>$\frac{\partial J}{\partial \mathbf{o}}$ 的 shape 取决于你的实现方式和数据批量：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>单样本（无batch）：&lt;/p>
+&lt;ul>
+&lt;li>$\mathbf{o}$ 是 $q$ 维向量，通常 shape 为 &lt;code>(q,)&lt;/code>（一维数组），也可能是 &lt;code>(q, 1)&lt;/code>（二维列向量）&lt;/li>
+&lt;li>此时，$\frac{\partial J}{\partial \mathbf{o}}$ 的 shape 通常为 &lt;code>(q,)&lt;/code> 或 &lt;code>(q, 1)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>批量（batch）：&lt;/p>
+&lt;ul>
+&lt;li>$\mathbf{o}$ 是 shape &lt;code>(batch_size, q)&lt;/code>，即&lt;u>每一行&lt;/u>对应一个样本的输出&lt;/li>
+&lt;li>此时，$\frac{\partial J}{\partial \mathbf{o}}$ 的 shape 为 &lt;code>(batch_size, q)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>多数情况我们会使用batch，借助PyTorch 的 &lt;code>@&lt;/code> 运算（也即&lt;code>matmul&lt;/code>），自动对第一个维度（batch 维）进行广播和批量矩阵乘法。此时，不论是通过${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$还是通过${\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$，均使用&lt;code>dJ_dh = dJ_do @ W2&lt;/code>语句得到$\frac{\partial J}{\partial \mathbf{h}}$。&lt;/p>
+&lt;h1 id="内存开销">内存开销
+&lt;/h1>&lt;p>反向传播重复利用前向传播中存储的中间值，以避免重复计算。影响之一是需要保留中间值，直到反向传播完成。这也是训练比单纯的预测需要更多的内存（显存）的原因之一。
+此外，这些中间值的大小与网络层的数量和批量的大小大致成正比，因此，使用更大的批量来训练更深层次的网络更容易导致&lt;strong>内存不足&lt;/strong>（out of memory）。&lt;/p></description></item><item><title>建站参考</title><link>https://miove527.github.io/zh-cn/p/%E5%BB%BA%E7%AB%99%E5%8F%82%E8%80%83/</link><pubDate>Mon, 12 May 2025 00:00:00 +0000</pubDate><guid>https://miove527.github.io/zh-cn/p/%E5%BB%BA%E7%AB%99%E5%8F%82%E8%80%83/</guid><description>&lt;h1 id="建站基础">建站基础
+&lt;/h1>&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+>https://github.com/CaiJimmy/hugo-theme-stack&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+>https://github.com/CaiJimmy/hugo-theme-stack-starter&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>Use this template&lt;/code> 直接创建一个新的仓库：&lt;code>&amp;lt;username&amp;gt;.github.io&lt;/code>&lt;/li>
+&lt;li>创建Codespace&lt;/li>
+&lt;li>手动微调&lt;/li>
+&lt;li>Settings -&amp;gt; Pages：Change the build branch from master to gh-pages&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>deploy automatically&lt;/li>
+&lt;/ul>
+&lt;h2 id="微调">微调
+&lt;/h2>&lt;ul>
+&lt;li>新文件夹&lt;code>layouts&lt;/code>&lt;/li>
+&lt;li>&lt;code>config\&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>config.toml&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>baseURL&lt;/code>&lt;/li>
+&lt;li>&lt;code>languageCode&lt;/code>&lt;/li>
+&lt;li>&lt;code>title&lt;/code>&lt;/li>
+&lt;li>&lt;code>defaultContentLanguage&lt;/code>&lt;/li>
+&lt;li>&lt;code>hasCJKLanguage&lt;/code>&lt;/li>
+&lt;li>&lt;code>disqusShortname&lt;/code>
+&lt;ul>
+&lt;li>disabled&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>params.toml&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>[sidebar]&lt;/code>
+&lt;ul>
+&lt;li>emoji&lt;/li>
+&lt;li>subtitle
+&lt;ul>
+&lt;li>&lt;code>\layouts\partials\sidebar\left.html&lt;/code>: &lt;code>&amp;lt;h2 class=&amp;quot;site-description&amp;quot;&amp;gt;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>[sidebar.avatar]&lt;/code>: src&lt;/li>
+&lt;li>&lt;code>math&lt;/code>&lt;/li>
+&lt;li>&lt;code>[footer]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>_languages.toml&lt;/code> -&amp;gt; &lt;code>languages.toml&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>title&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>menu.toml&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>[[social]]&lt;/code>&lt;/li>
+&lt;li>&lt;code>RSS&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>page&lt;/code>&lt;/li>
+&lt;li>&lt;code>README.md&lt;/code>&lt;/li>
+&lt;li>pic
+&lt;ul>
+&lt;li>&lt;code>assets\img\avatar.jpg&lt;/code>&lt;/li>
+&lt;li>&lt;code>\static\favicon.png&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>language switcher
+&lt;ul>
+&lt;li>add ref&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="文件夹架构">文件夹架构
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.github.io
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── .devcontainer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── .github
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── workflows
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── .vscode
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── assets
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── jsconfig.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── img
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── avatar.jpg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── scss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── custom.scss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── _default
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── config.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── languages.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── markup.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── menu.en.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── menu.zh-cn.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── module.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── params.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── permalinks.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── related.toml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── content
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── _index.en.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── _index.zh-cn.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── categories
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── _index.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├── archives
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ │ ├── index.en.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ │ └── index.zh-cn.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├── search
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ │ ├── index.en.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ │ └── index.zh-cn.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├── links
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ │ ├── index.en.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ │ └── index.zh-cn.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── about
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├── index.en.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── index.zh-cn.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── post
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── 250510_first
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── lib.jpg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── index.en.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── index.zh-cn.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── layouts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── 404.html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── index.html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── _default
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── partials
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── shortcodes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── static
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── favicon.png
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── css
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├── kityminder.core.css
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── mindmap.css
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── kity.min.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── kityminder.core.min.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── mindmap.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── .gitignore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── go.mod
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── go.sum
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── LICENSE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── README.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="front-matter">Front Matter
+&lt;/h1>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nn">---&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xx&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xx&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">date&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="ld">2025-05-10 00:00:00&lt;/span>&lt;span class="m">+0000&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">draft&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xx.jpg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">mindmap&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">translationKey&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;xx&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">tags&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">markdown&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">base&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">categories&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">syntax&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nn">---&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="思维导图">思维导图
+&lt;/h1>&lt;p>主要参考：http://www.9ong.com/082020/hugo%E6%94%AF%E6%8C%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.html#frontmatter%E8%AE%BE%E7%BD%AEmindmap&lt;/p>
+&lt;h2 id="步骤">步骤
+&lt;/h2>&lt;ul>
+&lt;li>Front Matter 设置：&lt;code>mindmap: true&lt;/code>&lt;/li>
+&lt;li>文件下载
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/fex-team/kityminder-core" target="_blank" rel="noopener"
+>https://github.com/fex-team/kityminder-core&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/HunterXuan/unordered-list-to-mind-map" target="_blank" rel="noopener"
+>https://github.com/HunterXuan/unordered-list-to-mind-map&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>引入：&lt;code>.github.io\layouts\partials\article\components\content.html&lt;/code>
+&lt;ul>
+&lt;li>jQuery&lt;/li>
+&lt;li>css&lt;/li>
+&lt;li>js&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>创建html：&lt;code>.github.io\layouts\shortcodes&lt;/code>
+&lt;ul>
+&lt;li>mind-md.html&lt;/li>
+&lt;li>mind-lg.html&lt;/li>
+&lt;li>mind-sm.html&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{.Site.BaseURL}}js/kity.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{.Site.BaseURL}}js/kityminder.core.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{.Site.BaseURL}}js/mindmap.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">link&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{.Site.BaseURL}}css/kityminder.core.css&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;stylesheet&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">link&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{.Site.BaseURL}}css/mindmap.css&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;stylesheet&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Get 0 }}&amp;#34;&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;mindmap mindmap-md&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- .Inner | markdownify -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Get 0 }}&amp;#34;&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;mindmap mindmap-lg&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- .Inner | markdownify -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Get 0 }}&amp;#34;&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;mindmap mindmap-sm&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- .Inner | markdownify -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="使用示例">使用示例
+&lt;/h2>&lt;div id="mymindmap" class="mindmap mindmap-md">&lt;ul>
+&lt;li>思维导图标题
+&lt;ul>
+&lt;li>一级节点
+&lt;ul>
+&lt;li>二级节点1&lt;/li>
+&lt;li>二级节点2&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>另一个一级节点
+&lt;ul>
+&lt;li>二级节点3&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{{&amp;lt; mind-md mymindmap &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">- 思维导图标题
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 一级节点
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 二级节点1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 二级节点2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 另一个一级节点
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 二级节点3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{{&amp;lt; /mind-md &amp;gt;}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>第一次尝试</title><link>https://miove527.github.io/zh-cn/p/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/</link><pubDate>Sat, 10 May 2025 00:37:00 +0000</pubDate><guid>https://miove527.github.io/zh-cn/p/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/</guid><description>&lt;img src="https://miove527.github.io/zh-cn/p/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/lib.jpg" alt="Featured image of post 第一次尝试" />&lt;p>这是一个测试&lt;/p>
+&lt;p>行内公式：$\alpha$&lt;/p>
+&lt;p>多行公式：
+&lt;/p>
+$$
+\sum_{i}{\frac{a}{b}}
+$$&lt;h2 id="标题">标题
+&lt;/h2>&lt;p>内容
+==试试高亮==&lt;/p>
+&lt;div id="mymindmap" class="mindmap mindmap-md">&lt;ul>
+&lt;li>思维导图标题
+&lt;ul>
+&lt;li>一级节点
+&lt;ul>
+&lt;li>二级节点1&lt;/li>
+&lt;li>二级节点2&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>另一个一级节点
+&lt;ul>
+&lt;li>二级节点3&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;h2 id="pdf">pdf
+&lt;/h2>&lt;script type="text/javascript" src= '/js/pdf-js/build/pdf.js'>&lt;/script>
+&lt;style>
+#embed-pdf-container {
+position: relative;
+width: 100%;
+height: auto;
+min-height: 20vh;
+}
+.pdf-canvas {
+border: 1px solid black;
+direction: ltr;
+width: 100%;
+height: auto;
+display: none;
+}
+#the-canvas {
+border: 1px solid black;
+direction: ltr;
+width: 100%;
+height: auto;
+display: none;
+}
+.pdf-loadingWrapper {
+display: none;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 350px;
+}
+.pdf-loading {
+display: inline-block;
+width: 50px;
+height: 50px;
+border: 3px solid #d2d0d0;;
+border-radius: 50%;
+border-top-color: #383838;
+animation: spin 1s ease-in-out infinite;
+-webkit-animation: spin 1s ease-in-out infinite;
+}
+#overlayText {
+word-wrap: break-word;
+display: grid;
+justify-content: end;
+}
+#overlayText a {
+position: relative;
+top: 10px;
+right: 4px;
+color: #000;
+margin: auto;
+background-color: #eeeeee;
+padding: 0.3em 1em;
+border: solid 2px;
+border-radius: 12px;
+border-color: #00000030;
+text-decoration: none;
+}
+#overlayText svg {
+height: clamp(1em, 2vw, 1.4em);
+width: clamp(1em, 2vw, 1.4em);
+}
+@keyframes spin {
+to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+to { -webkit-transform: rotate(360deg); }
+}
+&lt;/style>&lt;div class="embed-pdf-container" id="embed-pdf-container-051ab187">
+&lt;div class="pdf-loadingWrapper" id="pdf-loadingWrapper-051ab187">
+&lt;div class="pdf-loading" id="pdf-loading-051ab187">&lt;/div>
+&lt;/div>
+&lt;div id="overlayText">
+&lt;a href="../250605_MRI/MRI.pdf" aria-label="Download" download>
+&lt;svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+&lt;path d="M9 13c.3 0 .5-.1.7-.3L15.4 7 14 5.6l-4 4V1H8v8.6l-4-4L2.6 7l5.7 5.7c.2.2.4.3.7.3zm-7 2h14v2H2z" />
+&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;canvas class="pdf-canvas" id="pdf-canvas-051ab187">&lt;/canvas>
+&lt;/div>
+&lt;div class="pdf-paginator" id="pdf-paginator-051ab187">
+&lt;button id="pdf-prev-051ab187">Previous&lt;/button>
+&lt;button id="pdf-next-051ab187">Next&lt;/button> &amp;nbsp; &amp;nbsp;
+&lt;span>
+&lt;span class="pdf-pagenum" id="pdf-pagenum-051ab187">&lt;/span> / &lt;span class="pdf-pagecount" id="pdf-pagecount-051ab187">&lt;/span>
+&lt;/span>
+&lt;a class="pdf-source" id="pdf-source-051ab187" href="../250605_MRI/MRI.pdf">[pdf]&lt;/a>
+&lt;/div>
+&lt;noscript>
+View the PDF file &lt;a class="pdf-source" id="pdf-source-noscript-051ab187" href="../250605_MRI/MRI.pdf">here&lt;/a>.
+&lt;/noscript>
+&lt;script type="text/javascript">
+(function(){
+var url = '..\/250605_MRI\/MRI.pdf';
+var hidePaginator = "" === "true";
+var hideLoader = "" === "true";
+var selectedPageNum = parseInt("") || 1;
+var pdfjsLib = window['pdfjs-dist/build/pdf'];
+if (pdfjsLib.GlobalWorkerOptions.workerSrc == '')
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https:\/\/miove527.github.io\/" + 'js/pdf-js/build/pdf.worker.js';
+var pdfDoc = null,
+pageNum = selectedPageNum,
+pageRendering = false,
+pageNumPending = null,
+scale = 3,
+canvas = document.getElementById('pdf-canvas-051ab187'),
+ctx = canvas.getContext('2d'),
+paginator = document.getElementById("pdf-paginator-051ab187"),
+loadingWrapper = document.getElementById('pdf-loadingWrapper-051ab187');
+showPaginator();
+showLoader();
+function renderPage(num) {
+pageRendering = true;
+pdfDoc.getPage(num).then(function(page) {
+var viewport = page.getViewport({scale: scale});
+canvas.height = viewport.height;
+canvas.width = viewport.width;
+var renderContext = {
+canvasContext: ctx,
+viewport: viewport
+};
+var renderTask = page.render(renderContext);
+renderTask.promise.then(function() {
+pageRendering = false;
+showContent();
+if (pageNumPending !== null) {
+renderPage(pageNumPending);
+pageNumPending = null;
+}
+});
+});
+document.getElementById('pdf-pagenum-051ab187').textContent = num;
+}
+function showContent() {
+loadingWrapper.style.display = 'none';
+canvas.style.display = 'block';
+}
+function showLoader() {
+if(hideLoader) return
+loadingWrapper.style.display = 'flex';
+canvas.style.display = 'none';
+}
+function showPaginator() {
+if(hidePaginator) return
+paginator.style.display = 'block';
+}
+function queueRenderPage(num) {
+if (pageRendering) {
+pageNumPending = num;
+} else {
+renderPage(num);
+}
+}
+function onPrevPage() {
+if (pageNum &lt;= 1) {
+return;
+}
+pageNum--;
+queueRenderPage(pageNum);
+}
+document.getElementById('pdf-prev-051ab187').addEventListener('click', onPrevPage);
+function onNextPage() {
+if (pageNum >= pdfDoc.numPages) {
+return;
+}
+pageNum++;
+queueRenderPage(pageNum);
+}
+document.getElementById('pdf-next-051ab187').addEventListener('click', onNextPage);
+pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+pdfDoc = pdfDoc_;
+var numPages = pdfDoc.numPages;
+document.getElementById('pdf-pagecount-051ab187').textContent = numPages;
+if(pageNum > numPages) {
+pageNum = numPages
+}
+renderPage(pageNum);
+});
+})();
+&lt;/script></description></item></channel></rss>

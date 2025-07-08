@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Base on Miove's Blog</title><link>https://miove527.github.io/en/tags/base/</link><description>Recent content in Base on Miove's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 10 May 2025 00:37:00 +0000</lastBuildDate><atom:link href="https://miove527.github.io/en/tags/base/index.xml" rel="self" type="application/rss+xml"/><item><title>First try</title><link>https://miove527.github.io/en/p/first-try/</link><pubDate>Sat, 10 May 2025 00:37:00 +0000</pubDate><guid>https://miove527.github.io/en/p/first-try/</guid><description>&lt;img src="https://miove527.github.io/zh-cn/p/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/lib.jpg" alt="Featured image of post First try" />&lt;p>This is a test.&lt;/p>
+&lt;p>inline equation：$\alpha$&lt;/p>
+&lt;p>lines：
+&lt;/p>
+$$
+\sum_{i}{\frac{a}{b}}
+$$&lt;h2 id="title">title
+&lt;/h2>&lt;p>something
+==try highlight==&lt;/p></description></item></channel></rss>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Backprop on Miove 杂记</title><link>https://miove527.github.io/zh-cn/tags/backprop/</link><description>Recent content in Backprop on Miove 杂记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 13 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://miove527.github.io/zh-cn/tags/backprop/index.xml" rel="self" type="application/rss+xml"/><item><title>反向传播与计算图</title><link>https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/</link><pubDate>Tue, 13 May 2025 00:00:00 +0000</pubDate><guid>https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/</guid><description>&lt;img src="https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph.png" alt="Featured image of post 反向传播与计算图" />&lt;h1 id="前向传播">前向传播
+&lt;/h1>&lt;p>&lt;strong>前向传播&lt;/strong>（forward propagation）：按顺序（输入层$\to$输出层）计算和存储神经网络中每层的结果。&lt;/p>
+&lt;p>讨论示例：
+预设：隐藏层不包括偏置项&lt;/p>
+&lt;ul>
+&lt;li>输入样本$\mathbf{x}\in \mathbb{R}^d$&lt;/li>
+&lt;li>隐藏层的权重参数$\mathbf{W}^{(1)} \in \mathbb{R}^{h \times d}$&lt;/li>
+&lt;li>中间变量$\mathbf{z}= \mathbf{W}^{(1)} \mathbf{x}$
+&lt;ul>
+&lt;li>$\mathbf{z}\in \mathbb{R}^h$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>激活函数$\phi$&lt;/li>
+&lt;li>隐藏激活向量$\mathbf{h}= \phi (\mathbf{z})$
+&lt;ul>
+&lt;li>$\mathbf{h}\in \mathbb{R}^h$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>输出层的权重参数$\mathbf{W}^{(2)} \in \mathbb{R}^{q \times h}$&lt;/li>
+&lt;li>输出层变量$\mathbf{o}= \mathbf{W}^{(2)} \mathbf{h}$
+&lt;ul>
+&lt;li>$\mathbf{o}\in \mathbb{R}^q$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>单个数据样本的损失项$L = l(\mathbf{o}, y)$
+&lt;ul>
+&lt;li>损失函数$l$&lt;/li>
+&lt;li>样本标签$y$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>正则化项$s = \frac{\lambda}{2} \left(\|\mathbf{W}^{(1)}\|_F^2 + \|\mathbf{W}^{(2)}\|_F^2\right)$
+&lt;ul>
+&lt;li>$L_2$正则化&lt;/li>
+&lt;li>超参数$\lambda$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>模型在给定数据样本上的正则化损失$J = L + s$
+&lt;ul>
+&lt;li>即此时的&lt;strong>目标函数&lt;/strong>（objective function）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph.png"
+width="1046"
+height="403"
+srcset="https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph_hu_568f4d7d7d2f2947.png 480w, https://miove527.github.io/zh-cn/p/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE/calc-graph_hu_a2503a3b4588237d.png 1024w"
+loading="lazy"
+alt="计算图"
+class="gallery-image"
+data-flex-grow="259"
+data-flex-basis="622px"
+>&lt;/p>
+&lt;ul>
+&lt;li>正方形表示变量，圆圈表示操作符。&lt;/li>
+&lt;li>左下角表示输入，右上角表示输出。&lt;/li>
+&lt;li>箭头显示数据流的方向，主要是向右和向上。&lt;/li>
+&lt;/ul>
+&lt;h1 id="反向传播">反向传播
+&lt;/h1>&lt;p>&lt;strong>反向传播&lt;/strong>（backward propagation）：计算神经网络参数梯度的方法。
+根据微积分中的&lt;u>链式法则&lt;/u>，按相反的顺序从输出层到输入层遍历网络。&lt;/p>
+&lt;ul>
+&lt;li>存储计算某些参数梯度时所需的任何中间变量（偏导数）&lt;/li>
+&lt;li>$\text{prod}$运算符：在执行必要的操作（如换位和交换输入位置）后将其参数相乘。&lt;/li>
+&lt;li>目的：计算梯度$\frac{\partial J}{\partial \mathbf{W}^{(1)}}$和$\frac{\partial J}{\partial \mathbf{W}^{(2)}}$
+&lt;ul>
+&lt;li>先计算距离输出层更近的$\frac{\partial J}{\partial \mathbf{W}^{(2)}}$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+$$
+\begin{align*}
+\frac{\partial J}{\partial \mathbf{W}^{(2)}}
+&amp;= \frac{\partial J}{\partial L}\cdot \frac{\partial L}{\partial \mathbf{W}^{(2)}}
++\frac{\partial J}{\partial s}\cdot \frac{\partial s}{\partial \mathbf{W}^{(2)}} \\
+&amp;= 1\cdot \frac{\partial L}{\partial \mathbf{W}^{(2)}}
++\ 1\cdot \frac{\partial s}{\partial \mathbf{W}^{(2)}} \\
+&amp;= \frac{\partial L}{\partial \mathbf{o}} \cdot \frac{\partial \mathbf{o}}{\partial \mathbf{W}^{(2)}}
++ \lambda \mathbf{W}^{(2)}\\
+&amp;=\frac{\partial L}{\partial \mathbf{o}}
+\cdot \mathbf{h}^\top
++ \lambda \mathbf{W}^{(2)}\\
+\end{align*}
+$$$$
+\begin{align*}
+\frac{\partial J}{\partial \mathbf{W}^{(1)}}
+&amp;= \frac{\partial J}{\partial L}\cdot \frac{\partial L}{\partial \mathbf{W}^{(1)}}
++\frac{\partial J}{\partial s}\cdot \frac{\partial s}{\partial \mathbf{W}^{(1)}} \\
+&amp;= 1\cdot \frac{\partial L}{\partial \mathbf{W}^{(1)}}
++\ 1\cdot \frac{\partial s}{\partial \mathbf{W}^{(1)}} \\
+&amp;= \frac{\partial L}{\partial \mathbf{o}} \cdot \frac{\partial \mathbf{o}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=\frac{\partial L}{\partial \mathbf{o}}
+\cdot \frac{\partial \mathbf{o}}{\partial \mathbf{h}}
+\cdot \frac{\partial \mathbf{h}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=({\mathbf{W}^{(2)}}^\top \cdot \frac{\partial L}{\partial \mathbf{o}})
+\cdot \frac{\partial \mathbf{h}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=({\mathbf{W}^{(2)}}^\top \cdot \frac{\partial L}{\partial \mathbf{o}})
+\cdot \frac{\partial \mathbf{h}}{\partial \mathbf{z}}
+\cdot \frac{\partial \mathbf{z}}{\partial \mathbf{W}^{(1)}}
++ \lambda \mathbf{W}^{(1)}\\
+&amp;=({\mathbf{W}^{(2)}}^\top \cdot \frac{\partial L}{\partial \mathbf{o}})
+\odot \phi'\left(\mathbf{z}\right)
+\cdot \mathbf{x}^\top
++ \lambda \mathbf{W}^{(1)}\\
+\end{align*}
+$$&lt;p>由于$\frac{\partial J}{\partial L}=1$，故$\frac{\partial L}{\partial \mathbf{h}}$在数值上等于$\frac{\partial J}{\partial \mathbf{h}}$，下述$\frac{\partial J}{\partial \mathbf{h}}$、$\frac{\partial J}{\partial \mathbf{z}}$按此对应上述推导。&lt;/p>
+&lt;p>激活函数$\phi$是按元素计算的，计算中间变量$\mathbf{z}$的梯度$\frac{\partial J}{\partial \mathbf{z}} \in \mathbb{R}^h$
+需要使用按元素乘法运算符，用$\odot$表示：&lt;/p>
+$$
+\frac{\partial J}{\partial \mathbf{z}}
+= \text{prod}\left(\frac{\partial J}{\partial \mathbf{h}}, \frac{\partial \mathbf{h}}{\partial \mathbf{z}}\right)
+= \frac{\partial J}{\partial \mathbf{h}} \odot \phi'\left(\mathbf{z}\right)
+$$&lt;p>隐藏层输出的梯度$\frac{\partial J}{\partial \mathbf{h}} \in \mathbb{R}^h$由下式给出：&lt;/p>
+$$
+\frac{\partial J}{\partial \mathbf{h}}
+= \text{prod}\left(\frac{\partial J}{\partial \mathbf{o}}, \frac{\partial \mathbf{o}}{\partial \mathbf{h}}\right)
+= {\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}
+$$&lt;p>$J$ 是一个标量（损失函数的输出），$\mathbf{o}$ 是 $q$ 维向量，按照多元微积分，$\frac{\partial J}{\partial \mathbf{o}}$形状和 $\mathbf{o}$ 一致，即 $\frac{\partial J}{\partial \mathbf{o}} \in \mathbb{R}^q$；又$\mathbf{W}^{(2)} \in \mathbb{R}^{q \times h}$，故：
+&lt;/p>
+$$
+{{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}} \in \mathbb{R}^h
+$$&lt;blockquote>
+&lt;p>${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$与${\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$&lt;/p>&lt;/blockquote>
+&lt;p>在&lt;strong>反向传播的推导&lt;/strong>中，更常用${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$ 的写法，主要考虑以下：&lt;/p>
+&lt;ol>
+&lt;li>链式法则
+通过&lt;strong>上一层的梯度左乘该层权重的转置&lt;/strong>，得到每一层的梯度&lt;/li>
+&lt;li>与前向传播的结构对偶
+&lt;ul>
+&lt;li>前向传播：$\mathbf{o} = \mathbf{W}^{(2)} \mathbf{h}$&lt;/li>
+&lt;li>反向传播：$\frac{\partial J}{\partial \mathbf{h}} = {\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>对于$\mathbf{W}^{(2)} \in \mathbb{R}^{q \times h}$，为了在计算$\frac{\partial J}{\partial \mathbf{h}}$时形状匹配：&lt;/p>
+&lt;ul>
+&lt;li>$\frac{\partial J}{\partial \mathbf{h}} = {{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$：应将$\frac{\partial J}{\partial \mathbf{o}}$ 视作是 $q \times 1$ 的列向量（$\mathbb{R}^{q \times 1}$），得到$\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)} \in \mathbb{R}^{h \times 1}$&lt;/li>
+&lt;li>$\frac{\partial J}{\partial \mathbf{h}} = {\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$：应将$\frac{\partial J}{\partial \mathbf{o}}$ 视作是 $1 \times q$ 的行向量（$\mathbb{R}^{1 \times q}$），得到$\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)} \in \mathbb{R}^{1 \times h}$&lt;/li>
+&lt;/ul>
+&lt;p>&lt;u>区分行/列向量&lt;/u>，不是改变变量的本质维度，是为了在矩阵乘法等操作时形状能严格对齐。&lt;/p>
+&lt;p>但在&lt;strong>具体的编程实现&lt;/strong>时，${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$与${\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$很可能一致。&lt;/p>
+&lt;p>对于表述$\frac{\partial J}{\partial \mathbf{o}} \in \mathbb{R}^q$，只表示“$q$ 维实向量”，&lt;strong>不区分是行向量还是列向量&lt;/strong>，也不强调是1维还是2维（抽象意义上是1维向量）；而例如$\frac{\partial J}{\partial \mathbf{o}} \in \mathbb{R}^{q \times 1}$则明确表示“$q$ 行 $1$ 列的矩阵”，也就是列向量，在数学和编程实现中是2维的。&lt;/p>
+&lt;p>在实际编程（如 NumPy、PyTorch）中，&lt;/p>
+&lt;ul>
+&lt;li>$\mathbb{R}^q$ 通常对应 shape 为 &lt;code>(q,)&lt;/code> 的一维数组（向量）&lt;/li>
+&lt;li>$\mathbb{R}^{q \times 1}$ 对应 shape 为 &lt;code>(q, 1)&lt;/code> 的二维数组（列向量）&lt;/li>
+&lt;li>$\mathbb{R}^{1 \times q}$ 对应 shape 为 &lt;code>(1, q)&lt;/code> 的二维数组（行向量）&lt;/li>
+&lt;/ul>
+&lt;p>$\frac{\partial J}{\partial \mathbf{o}}$ 的 shape 取决于你的实现方式和数据批量：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>单样本（无batch）：&lt;/p>
+&lt;ul>
+&lt;li>$\mathbf{o}$ 是 $q$ 维向量，通常 shape 为 &lt;code>(q,)&lt;/code>（一维数组），也可能是 &lt;code>(q, 1)&lt;/code>（二维列向量）&lt;/li>
+&lt;li>此时，$\frac{\partial J}{\partial \mathbf{o}}$ 的 shape 通常为 &lt;code>(q,)&lt;/code> 或 &lt;code>(q, 1)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>批量（batch）：&lt;/p>
+&lt;ul>
+&lt;li>$\mathbf{o}$ 是 shape &lt;code>(batch_size, q)&lt;/code>，即&lt;u>每一行&lt;/u>对应一个样本的输出&lt;/li>
+&lt;li>此时，$\frac{\partial J}{\partial \mathbf{o}}$ 的 shape 为 &lt;code>(batch_size, q)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>多数情况我们会使用batch，借助PyTorch 的 &lt;code>@&lt;/code> 运算（也即&lt;code>matmul&lt;/code>），自动对第一个维度（batch 维）进行广播和批量矩阵乘法。此时，不论是通过${{\mathbf{W}^{(2)}}^\top \frac{\partial J}{\partial \mathbf{o}}}$还是通过${\frac{\partial J}{\partial \mathbf{o}} \cdot \mathbf{W}^{(2)}}$，均使用&lt;code>dJ_dh = dJ_do @ W2&lt;/code>语句得到$\frac{\partial J}{\partial \mathbf{h}}$。&lt;/p>
+&lt;h1 id="内存开销">内存开销
+&lt;/h1>&lt;p>反向传播重复利用前向传播中存储的中间值，以避免重复计算。影响之一是需要保留中间值，直到反向传播完成。这也是训练比单纯的预测需要更多的内存（显存）的原因之一。
+此外，这些中间值的大小与网络层的数量和批量的大小大致成正比，因此，使用更大的批量来训练更深层次的网络更容易导致&lt;strong>内存不足&lt;/strong>（out of memory）。&lt;/p></description></item></channel></rss>
