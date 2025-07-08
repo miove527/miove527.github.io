@@ -1,7 +1,7 @@
 ---
 title: MRI成像的物理基础及实验
 description: 以实验原理为主，含公式推导（pdf）
-date: 2025-05-10 00:37:00+0000
+date: 2025-06-05
 draft: false
 # image: lib.jpg
 mindmap: false
