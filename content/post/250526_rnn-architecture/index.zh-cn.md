@@ -1,6 +1,6 @@
 ---
 title: 循环神经网络 RNN
-description: mindmap
+description: 主要对GRU和LSTM两种架构进行介绍对比，同时包含了一些基本概念
 date: 2025-05-27
 draft: false
 # image: lib.jpg
